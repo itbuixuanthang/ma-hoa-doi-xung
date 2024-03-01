@@ -1,4 +1,3 @@
-// HỆ MÃ CAESAR
 public class CaesarCipher {
     // Hàm mã hoá Caesar Cipher
     public static String encrypt(String plaintext, int shift) {
@@ -8,7 +7,9 @@ public class CaesarCipher {
             char ch = plaintext.charAt(i);
             if (Character.isLetter(ch)) { // Kiểm tra xem ký tự có phải là chữ cái hay không
                 char base = Character.isUpperCase(ch) ? 'A' : 'a'; // Xác định xem chữ cái là chữ cái in hoa hay in thường
-                char shiftedChar = (char) (((ch - base + shift) % 26) + base); // Mã hoá ký tự
+                int charIndex = ch - base; // Số thứ tự của ký tự trong bảng chữ cái (0-25)
+                int encryptedIndex = (charIndex + shift) % 26; // Số thứ tự của ký tự đã được mã hoá
+                char shiftedChar = (char) (encryptedIndex + base); // Ký tự đã được mã hoá
                 result.append(shiftedChar); // Thêm ký tự đã mã hoá vào chuỗi kết quả
             } else {
                 result.append(ch); // Nếu không phải là chữ cái, giữ nguyên ký tự
@@ -24,8 +25,8 @@ public class CaesarCipher {
     }
 
     public static void main(String[] args) {
-        String plaintext = "See U Again"; // Chuỗi thông điệp ban đầu
-        int shift = 4; // Số lần di chuyển (shift) để mã hoá
+        String plaintext = "See u again"; // Chuỗi thông điệp ban đầu
+        int shift = 3; // Số lần di chuyển (shift) để mã hoá
 
         // Mã hoá
         String encryptedText = encrypt(plaintext, shift); // Gọi hàm mã hoá với thông điệp và số lần di chuyển đã cho
